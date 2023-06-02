@@ -3,8 +3,11 @@ const Jobs = require('../../models/jobs')
 
 module.exports = {
     async get(req, res){
+
+        const params = req.query
+
         try {
-            const result = await Jobs.list()
+            const result = await Jobs.list(params)
             res.json(result)
         } catch (error) {
             console.log(error)

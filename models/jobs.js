@@ -1,16 +1,27 @@
 const knex = require('../config/knex')
 
 module.exports = {
-    async list(){
+    async list(query){
+        const {
+            limit,
+            offset
+        } = query
+
         try {
             const result = await knex('_job_postings')
                 .select({
-                    company: '_company_info._company_name',
+                    company: 'comp._company_name',
+                    address: 'comp._address',
+                    city: 'comp._city_municipality',
+                    prov: 'comp._province',
                     job: '_job_Title',
                     minSalary: '_min_salary',
                     maxSalary: '_max_salary'
                 })
-                .leftJoin('_company_info', '_company_info._id','_job_postings._company_id')
+                .leftJoin('_company_info as comp', 'comp._id','_job_postings._company_id')
+                .limit(limit)
+                .offset(offset)
+                
 
             return { jobs : result }
             
