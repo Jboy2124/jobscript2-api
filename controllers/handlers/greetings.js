@@ -8,5 +8,14 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
+    },
+
+    async get(req, res){
+        try {
+            const data = await Greet.list()
+            res.json(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
