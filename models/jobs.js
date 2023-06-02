@@ -10,6 +10,7 @@ module.exports = {
         try {
             const result = await knex('_job_postings')
                 .select({
+                    id: '_job_postings._id',
                     company: 'comp._company_name',
                     address: 'comp._address',
                     city: 'comp._city_municipality',
@@ -21,9 +22,14 @@ module.exports = {
                 .leftJoin('_company_info as comp', 'comp._id','_job_postings._company_id')
                 .limit(limit)
                 .offset(offset)
+            
+            const total = await knex('_job_postings').count('_id as totalRows')
                 
 
-            return { jobs : result }
+            return { 
+                total: total, 
+                jobs : result 
+            }
             
         } catch (error) {
             console.log(error)
