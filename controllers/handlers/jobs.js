@@ -4,10 +4,16 @@ const Jobs = require('../../models/jobs')
 module.exports = {
     async get(req, res){
 
-        const params = req.query
+        const schema = Joi.object({
+            limit: Joi.number()
+                .required(),
+            offset: Joi.number()
+                .required()
+        })
 
         try {
-            const result = await Jobs.list(params)
+            const data = await schema.validateAsync(req.query)
+            const result = await Jobs.list(data)
             res.json(result)
         } catch (error) {
             console.log(error)
