@@ -14,7 +14,8 @@ module.exports = {
         try {
             const data = await schema.validateAsync(req.query)
             const result = await Jobs.list(data)
-            res.json(result)
+            // res.json(result)
+            res.status(200).json(result)
         } catch (error) {
             console.log(error)
         }
