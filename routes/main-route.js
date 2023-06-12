@@ -15,6 +15,7 @@ module.exports = router
     // JOBS
     .post('/job', Job.post)
     .get('/jobs', Job.get)
+    .get('/total-jobs', Job.getTotal)
 
     // CAREERS
     .post('/careers', Careers.post)

@@ -21,6 +21,17 @@ module.exports = {
         }
     },
 
+    async getTotal(req, res){
+        try {
+
+            const totalRow = await Jobs.count()
+            res.json(totalRow)
+
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
     async post(req, res){
         const schema = Joi.object({
             id: Joi.number()

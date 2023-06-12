@@ -23,16 +23,25 @@ module.exports = {
                 .limit(limit)
                 .offset(offset)
             
-            const total = await knex('_job_postings').count('_id as totalRows')
+            
                 
 
             return { 
-                total: total, 
                 jobs : result 
             }
             
         } catch (error) {
             console.log(error)
+        }
+    },
+
+    async count(){
+        try {
+            const total = await knex('_job_postings').count('_id as totalRows')
+            return { total: total }
+        } catch (error) {
+            console.log(error)
+            throw error
         }
     },
 

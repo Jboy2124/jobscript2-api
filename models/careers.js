@@ -1,7 +1,13 @@
 const knex = require('../config/knex')
 
 module.exports = {
-    async list(){
+    async list(params){
+
+        const {
+            limit,
+            offset
+        } = params
+
         try {
             const result = await knex('_careers')
                 .select({
@@ -9,7 +15,12 @@ module.exports = {
                     job: '_job_title',
                     desc: '_job_desc'
                 })
+                .where('_status', 'Active')
+                .limit(limit)
+                .offset(offset)
+
             return { careers : result }
+
         } catch (error) {
             console.log(error)
         }
