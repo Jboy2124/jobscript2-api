@@ -36,10 +36,7 @@ module.exports = {
             const [id] = await knex('_careers')
                 .insert({
                     _job_title: job,
-                    _job_desc: {
-                        primary: desc.primary,
-                        secondary: desc.secondary
-                    }
+                    _job_desc: desc
                 })
             return id
         } catch (error) {

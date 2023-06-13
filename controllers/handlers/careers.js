@@ -21,15 +21,22 @@ module.exports = {
     },
 
     async post(req, res){
+        // const schema = Joi.object({
+        //     job: Joi.string()
+        //         .required(),
+        //     desc: Joi.object({
+        //         primary: Joi.string()
+        //             .optional(),
+        //         secondary: Joi.string()
+        //             .optional()
+        //     })
+        // })
+
         const schema = Joi.object({
             job: Joi.string()
                 .required(),
-            desc: Joi.object({
-                primary: Joi.string()
-                    .optional(),
-                secondary: Joi.string()
-                    .optional()
-            })
+            desc: Joi.object()
+                .required()
         })
 
         try {
